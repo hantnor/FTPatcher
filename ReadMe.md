@@ -13,5 +13,5 @@ This is listed primarily for the use of **face tracking**, but this can be used 
        - The 'FTEdited.FBX' file the edited FBX that has the FT blendshapes. This is the FBX that will be produced when the original FBX is patched.
        - 'patch.bin' is the file path to the patch binary.
  2. Set up the package folder for the model you're making the patch for.
-    - In this template, the directory is ```FTPatcher/FTRootFolder/```. You can change this if you'd like. **Make sure yoou update Orchestrator.cs with the proper directory changes!**
+    - In this template, the directory is ```FTPatcher/FTRootFolder/```. You can change this if you'd like. **Make sure you update Orchestrator.cs with the proper directory changes!**
  3. Configure the Orchestrator script to work with the FBX. You can search for '@Config' in the file to find all the places where things need to be adjusted for the model.
