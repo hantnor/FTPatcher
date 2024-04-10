@@ -74,19 +74,19 @@ public class Orchestrator : EditorWindow {
   // NOTE(valuef):
   // @Config
   // The path pointing to the patch file that will patch the original FBX into the edited FT FBX.
-  public const string PATCH_FILE_PATH = "Assets/Han's Creations/GlobalNamespace 1.0 FT/patch.bin";
+  public const string PATCH_FILE_PATH = "Assets/FTRootFolder/GlobalNamespace 1.0 FT/patch.bin";
 
   // NOTE(valuef):
   // @Config
   // The path pointing to the hpatchz.exe executable which will patch the FBX with the patch.bin
   // file to create the final FT patched FBX.
-  public const string HPATCHZ_FILE_PATH = "Assets/Han's Creations/GlobalNamespace 1.0 FT/hpatchz.exe";
+  public const string HPATCHZ_FILE_PATH = "Assets/FTRootFolder/GlobalNamespace 1.0 FT/hpatchz.exe";
 
   // NOTE(valuef):
   // @Config
   // The MenuItem string here defines the path in the top bar of the Unity editor that'll the button
   // to open the patched will be placed in.
-  [MenuItem("Tools/Han's Creations/GlobalNamespace - FT Patcher")]
+  [MenuItem("Tools/YourNameHere/GlobalNamespace - FT Patcher")]
   public static void open() {
 
     var should_set_pos = !EditorWindow.HasOpenInstances<Orchestrator>();
@@ -147,7 +147,7 @@ public class Orchestrator : EditorWindow {
     GUILayout.Box(hantnor_logo, GUILayout.Height(64), GUILayout.Width(64));
     // NOTE(valuef):
     // @Config
-    EditorGUILayout.LabelField("Han's Creations - GlobalNamespace FT Patcher", header_label, GUILayout.Height(64));
+    EditorGUILayout.LabelField("YourNameHere - GlobalNamespace FT Patcher", header_label, GUILayout.Height(64));
     GUILayout.EndHorizontal();
 
     EditorGUILayout.Space();
