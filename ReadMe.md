@@ -1,7 +1,7 @@
 Batch files, showing proof of purchase, and TOS concerns are a thing of the past. With **FTPatcher**, you can include an in-editor pop-up window to easily patch edits to your model! No Unity experience necessary for the recipient.
 
 ### Note
-This is listed primarily for the use of **face tracking**, but this can be used for any model edits! Use this to your heart's content. :)
+This is listed primarily for the use of **face tracking**, but this can be used for any model edits, such as body modification, revamps, and other mesh edits. Use this to your heart's content. :)
 
 # Set-up:
  1. Create patch using hdiffz.exe: https://github.com/sisong/HDiffPatch 
