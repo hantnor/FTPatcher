@@ -21,7 +21,7 @@
  * Set-up:
  *   1. Create patch using hdiffz.exe: https://github.com/sisong/HDiffPatch
  *    Run the following line in a command line
- *      hdiffz.exe "HANOriginal.FBX" "HANEdited.FBX" patch.bin
+ *      hdiffz.exe "NONFTOriginal.fbx" "FTEdited.fbx" patch.bin
  *
  *    The both FBX files should be in the same directory as the hdiffz.exe executable.
  *    The 'Original.FBX' file is the original FBX that was edited to have the FT blendshapes.
@@ -49,7 +49,7 @@ using System.IO;
 // When configuring this to patch other models, rename the namespace to avoid any clashes during
 // compile time! I'd recommend changing out the avatar name here for the avatar that you'll be
 // adapting the patcher for.
-namespace hantnor.HANNamespace.FT {
+namespace hantnor.GlobalNamespace.FT {
 
 public class Orchestrator : EditorWindow {
 
@@ -58,42 +58,42 @@ public class Orchestrator : EditorWindow {
   // The GUID of the original FBX of the model that'll be patched. The orchestrator will try to find
   // the FBX using this GUID so that the user doesn't have to.
   // Look at the .meta file of the FBX to find the GUID of it.
-  public const string ORIGINAL_FBX_GUID = "HANGUID"; 
+  public const string ORIGINAL_FBX_GUID = "GUID"; 
 
   // NOTE(valuef):
   // @Config
   // The path pointing to the original FBX of the model that'll be patched. The orchestrator will
   // use this to try to find the FBX so that the user doesn't have to.
-  public const string DEFAULT_FBX_PATH = "HANOriginalPath/HANOriginal.fbx";
+  public const string DEFAULT_FBX_PATH = "PathToOriginalFBX/NONFTOriginal.fbx";
 
   // NOTE(valuef):
   // @Config
   // The path at which the original FBX will be backed up to before patching.
-  public const string BACKUP_FBX_PATH = "HANOriginalPath/HANOriginal BACKUP.fbx"; 
+  public const string BACKUP_FBX_PATH = "PathToOriginalFBX/NONFTOriginal BACKUP.fbx"; 
 
   // NOTE(valuef):
   // @Config
   // The path pointing to the patch file that will patch the original FBX into the edited FT FBX.
-  public const string PATCH_FILE_PATH = "Assets/Han's Creations/HANNamespace 1.0 FT/patch.bin";
+  public const string PATCH_FILE_PATH = "Assets/Han's Creations/GlobalNamespace 1.0 FT/patch.bin";
 
   // NOTE(valuef):
   // @Config
   // The path pointing to the hpatchz.exe executable which will patch the FBX with the patch.bin
   // file to create the final FT patched FBX.
-  public const string HPATCHZ_FILE_PATH = "Assets/Han's Creations/HANNamespace 1.0 FT/hpatchz.exe";
+  public const string HPATCHZ_FILE_PATH = "Assets/Han's Creations/GlobalNamespace 1.0 FT/hpatchz.exe";
 
   // NOTE(valuef):
   // @Config
   // The MenuItem string here defines the path in the top bar of the Unity editor that'll the button
   // to open the patched will be placed in.
-  [MenuItem("Tools/Han's Creations/HANNamespace - FT Patcher")]
+  [MenuItem("Tools/Han's Creations/GlobalNamespace - FT Patcher")]
   public static void open() {
 
     var should_set_pos = !EditorWindow.HasOpenInstances<Orchestrator>();
 
-    try_to_find_HANNamespace_fbx_if_needed();
+    try_to_find_GlobalNamespace_fbx_if_needed();
 
-    var window = EditorWindow.GetWindow<Orchestrator>(false, "HANNamespace FT DLC");
+    var window = EditorWindow.GetWindow<Orchestrator>(false, "GlobalNamespace FT DLC");
 
     if(should_set_pos) {
       window.position = new Rect(Screen.width * .5f, Screen.height * .35f, 600, 320);
@@ -103,12 +103,12 @@ public class Orchestrator : EditorWindow {
     window.Show();
   }
 
-  public static GameObject HANNamespace_fbx;
+  public static GameObject GlobalNamespace_fbx;
   public static bool first_open = true;
 
   void OnGUI() {
     if(first_open) {
-      try_to_find_HANNamespace_fbx_if_needed();
+      try_to_find_GlobalNamespace_fbx_if_needed();
       first_open = false;
     }
   
@@ -147,7 +147,7 @@ public class Orchestrator : EditorWindow {
     GUILayout.Box(hantnor_logo, GUILayout.Height(64), GUILayout.Width(64));
     // NOTE(valuef):
     // @Config
-    EditorGUILayout.LabelField("Han's Creations - HANNamespace FT Patcher", header_label, GUILayout.Height(64));
+    EditorGUILayout.LabelField("Han's Creations - GlobalNamespace FT Patcher", header_label, GUILayout.Height(64));
     GUILayout.EndHorizontal();
 
     EditorGUILayout.Space();
@@ -155,23 +155,23 @@ public class Orchestrator : EditorWindow {
 
     EditorGUILayout.LabelField("Welcome to the patcher!", bold_label);
     EditorGUILayout.LabelField("By default, you can hit the 'Patch' button on its own.", wrap_label);
-    EditorGUILayout.LabelField("Optionally, a 'HANNamespace FBX' slot is available if you have a specific prefab youâ€™d like to apply the patch onto.", wrap_label);
+    EditorGUILayout.LabelField("Optionally, a 'GlobalNamespace FBX' slot is available if you have a specific prefab youâ€™d like to apply the patch onto.", wrap_label);
 
     EditorGUILayout.LabelField("Have fun!", bold_label);
 
     EditorGUILayout.Space();
     EditorGUILayout.Space();
 
-    HANNamespace_fbx = (GameObject)EditorGUILayout.ObjectField("HANNamespace FBX", HANNamespace_fbx, typeof(GameObject), false);
+    GlobalNamespace_fbx = (GameObject)EditorGUILayout.ObjectField("GlobalNamespace FBX", GlobalNamespace_fbx, typeof(GameObject), false);
 
     EditorGUILayout.Space();
 
-    if(HANNamespace_fbx == null) {
-      EditorGUILayout.LabelField("Couldn't automatically find the HANNamespace fbx!", bold_warn_label);
+    if(GlobalNamespace_fbx == null) {
+      EditorGUILayout.LabelField("Couldn't automatically find the GlobalNamespace fbx!", bold_warn_label);
       EditorGUILayout.LabelField("In this case, you'll have to manually drag in the fbx from your Project view into the slot above.", wrap_label);
     }
 
-    GUI.enabled = HANNamespace_fbx != null;
+    GUI.enabled = GlobalNamespace_fbx != null;
     if(indented_button("Patch")) {
 
       var project_root = Application.dataPath;
@@ -189,7 +189,7 @@ public class Orchestrator : EditorWindow {
         }
       }
 
-      var fbx_relative_path = AssetDatabase.GetAssetPath(HANNamespace_fbx);
+      var fbx_relative_path = AssetDatabase.GetAssetPath(GlobalNamespace_fbx);
       var fbx_path = Path.Combine(project_root, fbx_relative_path);
       var patch_path = Path.Combine(project_root, PATCH_FILE_PATH);
       var hpatchz_path = Path.Combine(project_root, HPATCHZ_FILE_PATH);
@@ -351,8 +351,8 @@ public class Orchestrator : EditorWindow {
 
   public static
   void
-  try_to_find_HANNamespace_fbx_if_needed() {
-    if(HANNamespace_fbx != null) {
+  try_to_find_GlobalNamespace_fbx_if_needed() {
+    if(GlobalNamespace_fbx != null) {
       return;
     }
 
@@ -369,7 +369,7 @@ public class Orchestrator : EditorWindow {
         break;
       }
 
-      HANNamespace_fbx = go;
+      GlobalNamespace_fbx = go;
       return;
 
     } while(false);
@@ -382,7 +382,7 @@ public class Orchestrator : EditorWindow {
         break;
       }
 
-      HANNamespace_fbx = go;
+      GlobalNamespace_fbx = go;
     } while(false);
   }
 
@@ -403,7 +403,7 @@ public class Autoload {
       // @Config
       // The key suffix is a string that's used to determine if the project has shown the
       // orchestrator window once. You can change this out for different models.
-      var key_suffix = "hantnor.HANNamespace.FT.1";
+      var key_suffix = "hantnor.GlobalNamespace.FT.1";
       var key = Path.Combine(Application.dataPath, key_suffix);
 
       if(!EditorPrefs.HasKey(key)) {
@@ -413,7 +413,7 @@ public class Autoload {
     }
 
     AssetDatabase.importPackageCompleted += (name) => {
-      Orchestrator.try_to_find_HANNamespace_fbx_if_needed();
+      Orchestrator.try_to_find_GlobalNamespace_fbx_if_needed();
     };
   }
 }
